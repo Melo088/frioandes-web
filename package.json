@@ -1,0 +1,26 @@
+{
+  "type": "commonjs",
+  "name": "frioandes-web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "playwright-core": "^1.64.1",
+    "sharp": "^0.35.5",
+    "vite": "^8.3.5"
+  },
+  "dependencies": {
+    "@fontsource/schibsted-grotesk": "^5.3.0",
+    "gsap": "^3.15.0",
+    "lenis": "^1.3.27"
+  }
+}

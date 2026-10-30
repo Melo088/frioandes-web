@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FríoAndes · Cold chain platform</title>
+<meta name="description" content="The Azure platform designed for FríoAndes: network, security, telemetry, migration, Fabric, delivery and a shared design system.">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" href="brand/isotipo-principal.svg" type="image/svg+xml">
+<script type="module" src="/src/main.js"></script>
+</head>
+<body class="is-loading">
+
+<div id="pre" aria-hidden="true">
+  <svg class="pre-mark" viewBox="0 0 120 64">
+    <path d="M4 56 L30 30 L44 42 L68 12 L82 26 L96 18 L116 40"/>
+    <circle cx="68" cy="12" r="4.5"/>
+  </svg>
+</div>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="#top" class="nav-logo" aria-label="FríoAndes, back to top"><img src="brand/logo-principal.svg" alt="FríoAndes" height="30"></a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#layers">Platform</a>
+      <a href="#telemetry">Telemetry</a>
+      <a href="#migration">Migration</a>
+      <a href="#delivery">Delivery</a>
+      <a href="#design">Design</a>
+    </nav>
+    <a href="#layers" class="btn btn-dark nav-cta">View architecture</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <svg class="hero-ridge" viewBox="0 0 1440 520" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 470 L160 420 L250 450 L380 330 L470 370 L610 210 L700 270 L820 150 L900 200 L990 60 L1080 150 L1170 120 L1260 240 L1350 210 L1440 300"/>
+    </svg>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <h1 class="reveal">The cold chain, <em>rebuilt</em> for the cloud.</h1>
+        <p class="hero-sub fade">A complete Azure platform for 120 refrigerated trucks, 32 cold rooms and a 1.2 PB archive, moved out of a single datacenter in Cali without stopping dispatch.</p>
+        <div class="hero-actions fade">
+          <a href="#layers" class="btn btn-teal btn-sensor"><span class="dot" aria-hidden="true"></span>See the eight layers</a>
+          <a href="#migration" class="link">See the migration plan</a>
+        </div>
+      </div>
+
+      <div class="sensor fade" aria-label="Example of a cold room temperature reading">
+        <div class="sensor-top">
+          <div>
+            <b>Cold room 3</b>
+            <span>Cali regional center</span>
+          </div>
+          <span class="badge" data-state="normal"><svg viewBox="0 0 24 24" width="16" height="16" class="state-ico" data-k="normal"></svg><em>Normal</em></span>
+        </div>
+        <div class="sensor-temp"><span id="heroTemp">−18.2</span><small>°C</small></div>
+        <svg class="sensor-chart" id="heroChart" viewBox="0 0 400 140" preserveAspectRatio="none">
+          <rect class="band" x="0" y="40" width="400" height="60"/>
+          <line class="lim" x1="0" y1="40" x2="400" y2="40"/>
+          <line class="lim" x1="0" y1="100" x2="400" y2="100"/>
+          <path id="heroLine" d=""/>
+          <circle id="heroDot" r="4.5" cx="400" cy="70"/>
+        </svg>
+        <div class="sensor-foot">
+          <span>Allowed range −20 to −16 °C</span>
+          <span>Updated every 30 s</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="metrics" id="metrics"></div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="section why">
+    <div class="wrap why-grid">
+      <div class="why-copy">
+        <h2 class="reveal">One datacenter was carrying <em>everything</em>.</h2>
+        <p class="fade">Dispatch, tracking, billing and temperature history all ran on VMware in Cali, behind one firewall and a 400 Mbps link. Temperature arrived in batches, so nobody saw an excursion while it was happening.</p>
+      </div>
+      <div class="compare" id="compare">
+        <div class="compare-head"><span>Before</span><span>With the platform</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LAYERS -->
+  <section class="section layers" id="layers">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="reveal">Eight layers, <em>one</em> platform.</h2>
+        <p class="fade">Every layer was designed, sized and documented with its own diagram. Click any diagram to open it full size.</p>
+      </div>
+      <div class="layers-grid">
+        <aside class="layers-nav">
+          <ol id="layersNav"></ol>
+          <div class="layers-progress"><i id="layersBar"></i></div>
+        </aside>
+        <div class="layers-list" id="layersList"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TELEMETRY -->
+  <section class="section tint" id="telemetry">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="reveal">An excursion is visible in <em>under a minute</em>.</h2>
+        <p class="fade">Move the reading out of range or cut the signal. Each state has its own color, shape and label, so it reads at a distance and in low light.</p>
+      </div>
+
+      <div class="demo fade">
+        <div class="demo-read">
+          <span class="demo-label">Truck 14 · Bogotá to Cali</span>
+          <div class="demo-temp"><span id="dTemp">−18.2</span><small>°C</small></div>
+          <span class="badge big" id="dBadge" data-state="normal"><svg viewBox="0 0 24 24" width="18" height="18" id="dIcon"></svg><em id="dState">Normal</em></span>
+          <p class="demo-note" id="dNote">Within range. Nobody needs to act.</p>
+        </div>
+        <div class="demo-main">
+          <canvas id="dChart"></canvas>
+          <div class="demo-controls">
+            <label for="dRange">Cargo temperature</label>
+            <input id="dRange" type="range" min="-26" max="-8" step="0.1" value="-18.2">
+            <div class="demo-btns">
+              <button type="button" id="dCut" class="btn btn-line">Cut signal</button>
+              <div class="seg" role="group" aria-label="Shift">
+                <button type="button" class="on" data-shift="day">Day shift</button>
+                <button type="button" data-shift="night">Night shift</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="demo-alert" id="dAlert" data-on="false">
+          <span class="alert-dot"></span>
+          <div class="alert-copy">
+            <b id="dAlertTitle">No active alerts</b>
+            <p id="dAlertText">If a reading leaves the range, the alert must be on screen within 60 seconds.</p>
+          </div>
+          <div class="alert-bar"><i id="dAlertBar"></i><span>60 s</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MIGRATION -->
+  <section class="section" id="migration">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="reveal">From Cali to Azure <em>without stopping dispatch</em>.</h2>
+        <p class="fade">One cutover on a Sunday at 01:00, a full rehearsal two weeks earlier and 21 days to roll back. The archive travels on disks, because copying it over the network would take more than nine months.</p>
+      </div>
+      <div class="tl" id="tl">
+        <div class="tl-rail"><i id="tlFill"></i></div>
+        <div class="tl-items" id="tlItems"></div>
+      </div>
+      <div class="mig-figs">
+        <div class="fig fade"><b><span data-count="71">71</span></b><span>disks to seed the archive</span></div>
+        <div class="fig fade"><b><span data-count="2">2</span> h</b><span>cutover window, once</span></div>
+        <div class="fig fade"><b><span data-count="21">21</span> days</b><span>to roll back to Cali</span></div>
+        <figure class="fig-img fade" data-zoom><img src="img/diagrams/migracion.svg" alt="Diagram: decision, destination and timing for each piece" loading="lazy"><figcaption>Decision, destination and timing for each piece</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- DELIVERY -->
+  <section class="section tint" id="delivery">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="reveal">Every environment comes from <em>the same code</em>.</h2>
+        <p class="fade">Terraform modules for the network, security and ingestion, deployed by GitHub Actions with OIDC. No address range or firewall rule is typed by hand: modules read the verified data files and check their hashes first.</p>
+      </div>
+      <div class="pipe" id="pipe">
+        <div class="pipe-line"><i id="pipeFill"></i><b id="pipeDot"></b></div>
+        <ol class="pipe-steps" id="pipeSteps"></ol>
+      </div>
+      <div class="delivery-grid">
+        <div class="mod fade"><h3>Network module</h3><p>Virtual network and 11 subnets per environment, read from the verified address plan.</p></div>
+        <div class="mod fade"><h3>Security module</h3><p>Shared firewall policy and per-subnet controls, generated from the policy table.</p></div>
+        <div class="mod fade"><h3>Ingest module</h3><p>Private event buffer for temperature alerts, tested with a mocked provider.</p></div>
+        <div class="mod fade"><h3>Change window</h3><p>Deployments are blocked from 04:00 to 22:00 and during peak seasons. Cloud promotion ships disabled until the real subscription exists.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COST -->
+  <section class="section" id="cost">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="reveal">Costs you can <em>trace</em>.</h2>
+        <p class="fade">List prices, 730 hours a month. Every figure comes from a script that anyone can run again, with its assumption written next to it.</p>
+      </div>
+      <div class="costs" id="costs"></div>
+    </div>
+  </section>
+
+  <!-- DESIGN -->
+  <section class="section tint" id="design">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="reveal">One brand for the <em>night shift</em> and the day.</h2>
+        <p class="fade">The control tower works through the night and the customer portal during the day. Both share the logo, palette and rules, and each screen keeps the contrast it needs.</p>
+      </div>
+      <div class="screens">
+        <figure class="screen fade" data-zoom><img src="img/torre.webp" alt="Control tower screen, night shift" loading="lazy"><figcaption>Control tower, night shift</figcaption></figure>
+        <figure class="screen fade" data-zoom><img src="img/portal.webp" alt="Customer portal screen" loading="lazy"><figcaption>Customer portal</figcaption></figure>
+      </div>
+      <div class="brand-row">
+        <div class="palette" id="palette"></div>
+        <div class="states" id="states"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUTRO -->
+  <section class="outro">
+    <div class="wrap outro-in">
+      <img src="brand/isotipo-principal.svg" alt="" width="64" height="64" class="outro-mark">
+      <h2 class="reveal">Every reading, from the sensor <em>to the screen</em>.</h2>
+      <a href="#top" class="btn btn-dark">Back to top</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <img src="brand/logo-principal.svg" alt="FríoAndes" height="26">
+    <p>Design figures with documented assumptions. Trucks, routes and customers on the screens are sample data.</p>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" hidden>
+  <button type="button" class="lb-close">Close</button>
+  <div class="lb-scroll"><img alt=""></div>
+</div>
+
+</body>
+</html>
