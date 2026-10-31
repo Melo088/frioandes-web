@@ -301,7 +301,7 @@ input[type=range]::-moz-range-thumb { width: 16px; height: 16px; border-radius: 
 /* lightbox */
 .lightbox { position: fixed; inset: 0; z-index: 120; background: rgba(255, 255, 255, .96); backdrop-filter: blur(10px); }
 .lightbox[hidden] { display: none; }
-.lb-scroll { position: absolute; inset: 0; overflow: auto; display: grid; place-items: center; padding: 80px 32px 32px; cursor: zoom-in; }
+.lb-scroll { position: absolute; inset: 0; overflow: auto; overscroll-behavior: contain; display: grid; place-items: center; padding: 80px 32px 32px; cursor: zoom-in; }
 .lb-scroll.zoom { cursor: zoom-out; place-items: start; }
 .lb-scroll img { width: min(100%, 1800px); border: 1px solid var(--line); border-radius: 8px; background: #fff; padding: 12px; }
 .lb-scroll.zoom img { width: 200%; max-width: none; }
